@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10090e">
+<title>Bajo la luna, siempre tú</title>
+<style>
+:root{--night:#10090e;--wine:#651c35;--silver:#e9e2e6;--paper:#f0e5dc;--ink:#30202a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;color:var(--silver);background:radial-gradient(ellipse at 50% 0%,#421a2b66,transparent 48%),#10090e;font-family:Georgia,"Times New Roman",serif;overflow-x:hidden}
+.sky{position:absolute;inset:0 0 auto;height:500px;overflow:hidden;pointer-events:none;mask-image:linear-gradient(#000 65%,transparent)}
+.moon{position:absolute;top:70px;left:50%;width:clamp(105px,18vw,155px);aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle at 32% 28%,#fff,transparent 17%),radial-gradient(circle at 63% 65%,#7b6f801c 0 6%,transparent 7%),linear-gradient(145deg,#fff9f1,#d7cbd6 70%,#a99aa9);box-shadow:0 0 45px #e6d5e729,0 0 100px #bc9ac41a;animation:glow 7s ease-in-out infinite}
+.star{position:absolute;width:2px;height:2px;border-radius:50%;background:#f5eaf0;animation:twinkle 4s ease-in-out infinite}
+.bat{position:absolute;width:42px;fill:#070509;animation:fly 19s linear infinite}
+.bat.two{width:28px;top:230px!important;animation-duration:24s;animation-delay:-9s;opacity:.6}
+.bat.three{width:34px;top:120px!important;animation-duration:22s;animation-delay:-13s;opacity:.7}
+@keyframes glow{50%{box-shadow:0 0 55px #e6d5e73b,0 0 120px #bc9ac426}}
+@keyframes twinkle{0%,100%{opacity:.25}50%{opacity:.9;transform:scale(1.3)}}
+@keyframes fly{0%{transform:translate(-12vw,0)}50%{transform:translate(55vw,-15px)}100%{transform:translate(115vw,5px)}}
+header,main,footer{position:relative;z-index:1}header{text-align:center;padding:260px 20px 38px}
+.eyebrow{color:#c59aaa;text-transform:uppercase;letter-spacing:.22em;font:10px Arial,sans-serif}
+h1{margin:17px 0 12px;font-size:clamp(2.8rem,8vw,5.3rem);line-height:1;font-weight:400;letter-spacing:-.04em}h1 span{color:#bd7189;font-style:italic}
+.subtitle{max-width:450px;margin:auto;color:#b9aab4;line-height:1.8}
+main{width:min(100% - 30px,740px);margin:auto;padding-bottom:60px}
+.shell{padding:clamp(12px,3vw,24px);border:1px solid #b770892e;background:linear-gradient(145deg,#2d1826d4,#140c13f2);box-shadow:0 24px 90px #0005}
+.top{display:flex;align-items:center;justify-content:space-between;color:#c7a7b5;font:10px Arial,sans-serif;letter-spacing:.15em;text-transform:uppercase;padding:8px}
+.seal{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#8e344d,#4b1026 72%);border:1px solid #e297ab8c;font-size:20px}
+.envelope-area{display:grid;place-items:center;min-height:235px;padding:10px 0 22px}
+.envelope{position:relative;width:min(100%,370px);height:200px;cursor:pointer;perspective:900px;outline:none}
+.back{position:absolute;inset:0;background:linear-gradient(140deg,#3c182a,#24101e);border:1px solid #6f3349}
+.inside{position:absolute;left:7%;right:7%;bottom:7px;height:82%;display:grid;place-items:center;background:linear-gradient(150deg,#eee2db,#cdb9bd);transition:transform 1s cubic-bezier(.2,.7,.2,1);z-index:1}
+.inside span{color:#4c2435;font-size:1.1rem;font-style:italic;text-align:center}
+.front{position:absolute;inset:0;background:linear-gradient(145deg,#521b31,#321222);clip-path:polygon(0 0,50% 56%,100% 0,100% 100%,0 100%);z-index:3}
+.flap{position:absolute;inset:0;background:linear-gradient(160deg,#74253f,#42152b);clip-path:polygon(0 0,100% 0,50% 62%);transform-origin:top center;transition:transform .75s ease;z-index:4}
+.stamp{position:absolute;z-index:5;left:50%;top:53%;transform:translate(-50%,-50%);width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 30% 25%,#a5415d,#4e1027 80%);border:1px solid #cf8498;color:#f4d9e0;transition:opacity .25s}
+.envelope.open .flap{transform:rotateX(180deg);z-index:0}.envelope.open .inside{transform:translateY(-100px)}.envelope.open .stamp{opacity:0}
+.hint{text-align:center;color:#c6a9b6;font:11px Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+.letter{max-height:0;opacity:0;overflow:hidden;transform:translateY(12px);transition:max-height 1.2s ease,opacity .7s ease,transform .7s ease}
+.letter.revealed{max-height:12000px;opacity:1;transform:none}
+.paper{margin:5px 0;padding:clamp(24px,6vw,48px);color:var(--ink);background:radial-gradient(ellipse at top left,#ffffffb3,transparent 50%),linear-gradient(135deg,#f2e8df,#e5d5d1);border:1px solid #bca4a7;box-shadow:0 8px 26px #0003;overflow-wrap:anywhere}
+.date{color:#805365;font:10px Arial,sans-serif;letter-spacing:.15em;text-transform:uppercase;margin-bottom:28px}
+.paper h2{margin:0 0 22px;font-size:clamp(1.65rem,5vw,2.2rem);font-weight:400;color:#54263a}
+.letter-text{white-space:pre-line;font-size:clamp(1rem,2.7vw,1.12rem);line-height:1.95}
+.signature{margin-top:30px;color:#6a2d45;font-size:1.25rem;font-style:italic;line-height:1.7}.end{text-align:center;margin-top:30px;color:#85536a;font-size:19px;letter-spacing:.5em}
+.actions{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin:24px 0 4px}
+button{border:1px solid #c1758f80;padding:12px 18px;background:#651c3540;color:#eadce3;font:11px Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+button:hover{background:#7e254573}button:focus-visible,.envelope:focus-visible{outline:2px solid #d58ba3;outline-offset:4px}
+.note{text-align:center;color:#93808d;font:11px/1.8 Arial,sans-serif;margin-top:17px}footer{text-align:center;padding:0 20px 34px;color:#806d7a;font:10px Arial,sans-serif;letter-spacing:.13em;text-transform:uppercase}
+@media(max-width:480px){header{padding-top:230px}.moon{top:52px}.envelope{height:175px}.envelope-area{min-height:210px}.envelope.open .inside{transform:translateY(-88px)}.paper{padding:25px 20px}.actions button{flex:1 1 140px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+@media print{body{background:white;color:black}.sky,.envelope-area,.hint,.actions,footer,.top{display:none!important}header{padding:20px 0}h1{color:#54263a}.subtitle{color:#444}main{width:100%}.shell{background:white;border:0;box-shadow:none;padding:0}.letter{max-height:none!important;opacity:1!important;transform:none!important;overflow:visible}.paper{box-shadow:none;break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true">
+<div class="moon"></div>
+<svg class="bat" style="top:155px;left:-8%" viewBox="0 0 100 50"><path d="M50 20 C43 9 35 5 25 8 C27 15 18 13 10 7 C12 19 5 25 1 28 C17 27 22 36 29 42 C35 34 41 30 48 31 L50 37 L52 31 C59 30 65 34 71 42 C78 36 83 27 99 28 C95 25 88 19 90 7 C82 13 73 15 75 8 C65 5 57 9 50 20 Z"/></svg>
+<svg class="bat two" style="left:-10%" viewBox="0 0 100 50"><path d="M50 20 C43 9 35 5 25 8 C27 15 18 13 10 7 C12 19 5 25 1 28 C17 27 22 36 29 42 C35 34 41 30 48 31 L50 37 L52 31 C59 30 65 34 71 42 C78 36 83 27 99 28 C95 25 88 19 90 7 C82 13 73 15 75 8 C65 5 57 9 50 20 Z"/></svg>
+<svg class="bat three" style="left:-10%" viewBox="0 0 100 50"><path d="M50 20 C43 9 35 5 25 8 C27 15 18 13 10 7 C12 19 5 25 1 28 C17 27 22 36 29 42 C35 34 41 30 48 31 L50 37 L52 31 C59 30 65 34 71 42 C78 36 83 27 99 28 C95 25 88 19 90 7 C82 13 73 15 75 8 C65 5 57 9 50 20 Z"/></svg>
+<div class="star" style="top:75px;left:15%"></div><div class="star" style="top:130px;left:24%;animation-delay:-2s"></div><div class="star" style="top:90px;left:78%;animation-delay:-.5s"></div><div class="star" style="top:190px;left:84%;animation-delay:-3s"></div><div class="star" style="top:240px;left:12%;animation-delay:-1.5s"></div><div class="star" style="top:45px;left:64%;animation-delay:-2.5s"></div><div class="star" style="top:205px;left:69%;animation-delay:-.8s"></div><div class="star" style="top:160px;left:41%;animation-delay:-3.2s"></div>
+</div>
+<header><div class="eyebrow">Una carta en la noche</div><h1>Bajo <span>la luna</span></h1><p class="subtitle"> Las noches fueron hechas principalmente para decir cosas que no podemos decir mañana por el día. </p></header>
+<main><section class="shell" aria-label="Carta personal">
+<div class="top"><span> Lo eres todo </span><span class="seal" aria-hidden="true">☾</span></div>
+<div class="envelope-area"><div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Abrir el sobre" aria-expanded="false"><div class="back"></div><div class="inside"><span>Unas palabras para ti…</span></div><div class="front"></div><div class="flap"></div><div class="stamp" aria-hidden="true">✦</div></div></div>
+<p class="hint" id="hint">Pulsa el sobre para descubrir la carta</p>
+<article class="letter" id="letter" aria-hidden="true"><div class="paper">
+<div class="date" id="date"></div><h2 id="heading"></h2><div class="letter-text" id="letterText"></div>
+<div class="signature">Con todo mi amor,<br><span id="signature"></span></div><div class="end" aria-hidden="true">✦ · ☾ · ✦</div>
+</div></article>
+<div class="actions"><button id="toggle" type="button">Abrir carta</button><button id="print" type="button">Imprimir / guardar PDF</button><button id="reset" type="button">Cerrar sobre</button></div>
+<p class="note">Un pequeño mensaje, guardado entre la noche y la luna.</p>
+</section></main><footer>Escrita bajo la luna · Sellada en secreto</footer>
+<script>
+/* PERSONALIZA TU CARTA: cambia estos textos. Conserva las comillas y las comillas invertidas de LETTER_TEXT. */
+const LETTER_DATE = "Bajo la luna, siempre tú";
+const LETTER_HEADING = "Para alguien que llevo en el corazón";
+const LETTER_TEXT = `Hay tantas cosas que quisiera decirte que, a veces, siento que las palabras se quedan demasiado pequeñas para explicar todo lo que pasa por mi corazón cuando pienso en ti. No sé si alguna vez podré encontrar la manera perfecta de hacerte entender lo que significas para mí, pero quiero intentarlo, porque si hay alguien que merece conocer la sinceridad de mis sentimientos, eres tú.
+
+Desde que ocupas un lugar en mi vida, hay pequeños momentos que han adquirido un significado diferente. Una canción puede llevarme a ti, una noche tranquila puede hacerme pensar en tu sonrisa y hasta la luna, que ha acompañado tantas noches silenciosas, parece tener algo especial cuando me descubro imaginando que tú también estás bajo su luz. Es curioso cómo una persona puede convertirse, poco a poco, en un pensamiento bonito al que uno siempre termina regresando.
+
+Y si pudiera pedirle algo a la vida, no sería que te convirtiera en alguien sin miedos, sin dudas o sin heridas. Le pediría que me permitiera conocerte de verdad, incluso en esas partes de ti que te cuesta mostrar. Quisiera conocer tus alegrías, tus sueños, tus pequeñas manías y esas cosas que quizá no le cuentas a todo el mundo. Pero también quisiera conocer tus días difíciles, tus inseguridades, aquello que te duele y los pensamientos que guardas cuando sientes que nadie podría comprenderte.
+
+Porque no quiero quererte únicamente cuando sonríes, cuando todo sale bien o cuando el mundo parece estar de tu lado. Quiero quererte también cuando tengas un día terrible, cuando estés cansada de intentarlo, cuando no encuentres las palabras para explicar lo que sientes o cuando necesites detenerte un momento para respirar. Quiero recordar que detrás de cada silencio hay una historia, detrás de cada reacción puede existir un sentimiento que todavía no sé comprender y detrás de tus días difíciles sigue estando esa persona maravillosa que merece amor, paciencia y ternura.
+
+No quiero que sientas que debes esconder tus tristezas para no preocuparme, ni que tienes que aparentar fortaleza para seguir siendo especial ante mis ojos. Si algún día el peso de todo se vuelve demasiado grande, me gustaría que pudieras acercarte a mí y descansar un poquito del mundo. Que encuentres en mis palabras un lugar tranquilo, en mis abrazos un refugio y en mi presencia la certeza de que no tienes que enfrentarte a cada batalla en soledad.
+
+Quizá no siempre sepa qué decirte. Tal vez haya momentos en los que no pueda resolver aquello que te preocupa, ni borrar con un beso las cosas que te hacen daño. Pero quiero aprender a acompañarte de la manera que necesitas. Quiero escucharte sin apresurar tus sentimientos, comprenderte sin juzgarte y darte espacio cuando lo necesites, sin hacerte dudar del cariño que te tengo. Porque amarte, para mí, también significa aprender a entender tu corazón, incluso cuando sus latidos parezcan difíciles de descifrar.
+
+Y si alguna vez llegas a mirarte con dureza, si un día dudas de lo que vales o sientes que no eres suficiente, quisiera poder recordarte todas las razones por las que eres tan especial para mí. Quisiera que pudieras verte a través de mis ojos, aunque fuera por un instante, para que comprendieras que no necesito que seas perfecta para encontrar belleza en ti. No necesito que tengas todo resuelto, que nunca te equivoques o que siempre sepas cómo continuar. Me basta con que seas tú, con esa forma tan tuya de existir, de sentir y de dejar huellas en mi vida sin darte cuenta.
+
+Quiero ser quien celebre tus logros, incluso aquellos que te parezcan pequeños. Quien te recuerde lo lejos que has llegado cuando sientas que no avanzas. Quien te escuche hablar de tus sueños y te anime a perseguirlos, sin pedirte que renuncies a ellos por mí. Quiero verte crecer, descubrir nuevas partes de ti y convertirte en todo aquello que deseas ser. No quiero apagar ninguna de tus luces para que brille la mía; quisiera que, de alguna manera, nuestras luces pudieran acompañarse.
+
+Y si alguna vez nos toca atravesar momentos difíciles, deseo que recordemos que el amor no consiste en nunca tener diferencias, sino en aprender a hablarnos con sinceridad, tratarnos con ternura y encontrar la voluntad de comprendernos. No te prometo una historia sin errores, sin días grises o sin obstáculos. Te prometo algo más humano: mis ganas de escucharte, de reconocer cuando me equivoque, de aprender contigo y de cuidar lo que construyamos con respeto y honestidad.
+
+Porque mi cariño por ti no nace de la idea de que seas perfecta, sino de que eres tú. Y no quisiera que sintieras que debes ganarte cada día el derecho a ser querida. Quiero que puedas sentirte amada sin tener que demostrar constantemente que lo mereces, que puedas descansar de tus propias exigencias y recordar que también mereces recibir toda esa ternura que tantas veces quizá entregas a los demás.
+
+Si pudiera elegir un lugar en el que quedarme cuando el mundo se vuelva demasiado ruidoso, elegiría uno en el que pudiéramos estar tranquilos, sin necesidad de hacer nada extraordinario. Tal vez una noche fría, el cielo oscuro sobre nosotros, la luna acompañándonos desde lejos y tu mano entre las mías. No necesitaría grandes promesas ni momentos perfectos. Me bastaría con mirarte y sentir que, entre tantas cosas inciertas, hay algo hermoso en poder compartir ese instante contigo.
+
+Y cuando llegue la noche, cuando el cielo se vista de negro y los murciélagos atraviesen la oscuridad bajo la luna, quisiera que recordaras algo: no toda oscuridad tiene que dar miedo, ni toda noche tiene que sentirse solitaria. A veces, incluso en los lugares más oscuros, se encuentran las cosas más bonitas. Y entre todas las casualidades que pudieron cruzarse en mi camino, conocerte es una de esas que me gustaría seguir agradeciendo.
+
+Si algún día la vida te pesa, quisiera acompañarte sin hacerte sentir débil. Si necesitas llorar, quisiera abrazarte sin exigirte explicaciones. Si necesitas hablar, quisiera escucharte con el corazón abierto. Y si necesitas caminar un rato por tu cuenta, quisiera respetar tu espacio y seguir deseando que encuentres paz. Porque amarte no significa querer decidir por ti, sino querer verte bien, incluso cuando el camino que debas recorrer sea uno que solo tú puedas elegir.
+
+No sé qué nos depara el futuro, ni cuántas lunas tendremos la oportunidad de contemplar. No puedo prometerte que cada día será bonito, pero sí puedo decirte que lo que siento por ti merece ser expresado con honestidad, cuidado y hechos. Quiero que mis palabras tengan sentido en la manera en que te trato, que mi cariño se note en los pequeños detalles y que mi apoyo no sea solamente una promesa escrita en una noche inspirada.
+
+Quiero que, cuando pienses en mí, no recuerdes únicamente a alguien que te dijo cosas bonitas, sino a alguien que intentó hacerte sentir querida, escuchada, respetada y comprendida. Alguien con quien pudiste ser tú misma, sin miedo a que tus días difíciles te hicieran menos merecedora de amor.
+
+Y si pudiera guardar un deseo en algún rincón del cielo, lo escribiría despacio, como si la luna pudiera leerlo: que nunca te falten motivos para sonreír, que encuentres fuerza cuando sientas que te falta, que jamás olvides lo mucho que vales y que, en los momentos en los que necesites cariño, puedas recordar que existe alguien que piensa en ti con una ternura difícil de explicar.
+
+No quiero ser solamente una página bonita en tu historia. Si la vida nos lo permite y ambos lo elegimos, quiero ser alguien con quien puedas escribir muchos capítulos más; algunos llenos de risas, otros de aprendizajes y quizá unos cuantos de noches difíciles que, tomadas de la mano, podamos atravesar con paciencia.
+
+Porque, entre tantas cosas que cambian, hay algo que quiero que tengas presente: no tienes que enfrentarte a todo tú sola, no tienes que ser fuerte a cada instante y no tienes que ocultar lo que sientes para que yo encuentre motivos para quererte.
+
+Te quiero en tus días de sol y también en tus noches de tormenta. En tus sonrisas y en tus silencios. En tus certezas y en tus dudas. No porque quiera salvarte de todo lo que pueda dolerte, sino porque quisiera caminar a tu lado mientras descubres que eres capaz de atravesar mucho más de lo que imaginas.
+
+Y si alguna vez dudas de lo que significas para mí, mira la luna cuando la noche esté despejada. Piensa en todas las palabras que no siempre sé decirte, en todos los pequeños detalles que me recuerdan a ti y en este deseo tan sincero de verte feliz.
+
+Quizá no pueda estar siempre bajo el mismo cielo que tú, ni detener el tiempo en los momentos que quisiera conservar para siempre. Pero mientras tenga la oportunidad de compartir mi vida contigo, quiero hacerlo con cariño, con paciencia, con comprensión y con un amor que no necesite que seas perfecta para encontrarte maravillosa.
+
+Porque si la noche tiene sus estrellas, sus secretos y su luna, yo tengo mis propias razones para mirar el cielo y sonreír.
+
+Y muchas de ellas tienen tu nombre.
+
+Con todo mi amor, hoy y en cada noche que me permita pensarte.`;
+const LETTER_SIGNATURE = "Te amo.";
+
+document.getElementById("date").textContent = LETTER_DATE;
+document.getElementById("heading").textContent = LETTER_HEADING;
+document.getElementById("letterText").textContent = LETTER_TEXT;
+document.getElementById("signature").textContent = LETTER_SIGNATURE;
+const envelope=document.getElementById("envelope"), letter=document.getElementById("letter"), hint=document.getElementById("hint"), toggle=document.getElementById("toggle");
+function openLetter(){envelope.classList.add("open");letter.classList.add("revealed");envelope.setAttribute("aria-expanded","true");letter.setAttribute("aria-hidden","false");envelope.setAttribute("aria-label","Cerrar el sobre");hint.textContent="La carta ha sido revelada";toggle.textContent="Cerrar carta"}
+function closeLetter(){envelope.classList.remove("open");letter.classList.remove("revealed");envelope.setAttribute("aria-expanded","false");letter.setAttribute("aria-hidden","true");envelope.setAttribute("aria-label","Abrir el sobre");hint.textContent="Pulsa el sobre para descubrir la carta";toggle.textContent="Abrir carta"}
+function toggleLetter(){letter.classList.contains("revealed")?closeLetter():openLetter()}
+envelope.addEventListener("click",toggleLetter);
+envelope.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();toggleLetter()}});
+toggle.addEventListener("click",toggleLetter);
+document.getElementById("reset").addEventListener("click",closeLetter);
+document.getElementById("print").addEventListener("click",()=>{openLetter();setTimeout(()=>window.print(),450)});
+</script>
+</body>
+</html>
